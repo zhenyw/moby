@@ -22,7 +22,7 @@ install_runc() {
 	echo "Install runc version $RUNC_COMMIT"
 	git clone https://github.com/zhenyw/runc.git "$GOPATH/src/github.com/opencontainers/runc"
 	cd "$GOPATH/src/github.com/opencontainers/runc"
-	git checkout docker-runc
+	git checkout gpu-cgroup
 	make BUILDTAGS="$RUNC_BUILDTAGS" $1
 	cp runc /usr/local/bin/docker-runc
 }
@@ -58,7 +58,7 @@ install_dockercli() {
 	echo "Install docker/cli version $DOCKERCLI_COMMIT"
 	git clone "$DOCKERCLI_REPO" "$GOPATH/src/github.com/docker/cli"
 	cd "$GOPATH/src/github.com/docker/cli"
-	git checkout docker-cli
+	git checkout gpu-cgroup
 	go build -o /usr/local/bin/docker github.com/docker/cli/cmd/docker
 }
 
