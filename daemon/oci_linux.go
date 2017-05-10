@@ -57,6 +57,7 @@ func setResources(s *specs.Spec, r containertypes.Resources) error {
 
 	memoryRes := getMemoryResources(r)
 	cpuRes := getCPUResources(r)
+	gpuRes := getGPUResources(r)
 	blkioWeight := r.BlkioWeight
 
 	specResources := &specs.Resources{
@@ -74,6 +75,7 @@ func setResources(s *specs.Spec, r containertypes.Resources) error {
 		Pids: &specs.Pids{
 			Limit: &r.PidsLimit,
 		},
+		GPU:    gpuRes,
 	}
 
 	if s.Linux.Resources != nil && len(s.Linux.Resources.Devices) > 0 {

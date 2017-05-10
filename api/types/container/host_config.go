@@ -309,6 +309,8 @@ type Resources struct {
 	OomKillDisable       *bool           // Whether to disable OOM Killer or not
 	PidsLimit            int64           // Setting pids limit for a container
 	Ulimits              []*units.Ulimit // List of ulimits to be set in the container
+	GPUMemory	     uint64          // Maximum GPU memory used by the container
+	GPUPriority          int64           // Priority set for GPU in container
 
 	// Applicable to Windows
 	CPUCount           int64  `json:"CpuCount"`   // CPU count

@@ -144,6 +144,22 @@ func getCPUResources(config containertypes.Resources) *specs.CPU {
 	return &cpu
 }
 
+func getGPUResources(config containertypes.Resources) *specs.GPU {
+	gpu := specs.GPU{}
+
+	if config.GPUMemory != 0 {
+		period := uint64(config.GPUMemory)
+		gpu.Memory = &period
+	}
+
+	if config.GPUPriority != 0 {
+		runtime := int64(config.GPUPriority)
+		gpu.Priority = &runtime
+	}
+
+	return &gpu
+}
+
 func getBlkioWeightDevices(config containertypes.Resources) ([]specs.WeightDevice, error) {
 	var stat syscall.Stat_t
 	var blkioWeightDevices []specs.WeightDevice
