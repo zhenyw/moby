@@ -20,9 +20,9 @@ RUNC_BUILDTAGS="${RUNC_BUILDTAGS:-"seccomp apparmor selinux"}"
 
 install_runc() {
 	echo "Install runc version $RUNC_COMMIT"
-	git clone https://github.com/docker/runc.git "$GOPATH/src/github.com/opencontainers/runc"
+	git clone https://github.com/zhenyw/runc.git "$GOPATH/src/github.com/opencontainers/runc"
 	cd "$GOPATH/src/github.com/opencontainers/runc"
-	git checkout -q "$RUNC_COMMIT"
+	git checkout docker-runc
 	make BUILDTAGS="$RUNC_BUILDTAGS" $1
 	cp runc /usr/local/bin/docker-runc
 }
@@ -58,7 +58,7 @@ install_dockercli() {
 	echo "Install docker/cli version $DOCKERCLI_COMMIT"
 	git clone "$DOCKERCLI_REPO" "$GOPATH/src/github.com/docker/cli"
 	cd "$GOPATH/src/github.com/docker/cli"
-	git checkout -q "$DOCKERCLI_COMMIT"
+	git checkout docker-cli
 	go build -o /usr/local/bin/docker github.com/docker/cli/cmd/docker
 }
 
